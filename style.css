@@ -35,29 +35,6 @@
     --tile-border: rgba(139, 92, 246, 0.12);
 }
 
-[data-theme="dark"] {
-    --bg-primary: #0A0118;
-    --bg-secondary: #1A0B2E;
-    --bg-hover: #2D1B4E;
-    --text-primary: #F8F9FA;
-    --text-secondary: #D1D5DB;
-    --text-muted: #9CA3AF;
-    --border-color: #3B2667;
-    --accent-primary: #A78BFA;
-    --accent-primary-hover: #8B5CF6;
-    --accent-secondary: #F472B6;
-    --gradient-primary: linear-gradient(135deg, #A78BFA 0%, #F472B6 100%);
-    --gradient-secondary: linear-gradient(135deg, #22D3EE 0%, #60A5FA 100%);
-    --shadow-sm: 0 1px 3px 0 rgb(167 139 250 / 0.2);
-    --shadow-md: 0 4px 12px -2px rgb(167 139 250 / 0.3);
-    --shadow-lg: 0 20px 25px -5px rgb(167 139 250 / 0.4);
-    --shadow-glow: 0 0 30px rgb(167 139 250 / 0.5);
-    --tile-color-1: rgba(167, 139, 250, 0.12);
-    --tile-color-2: rgba(244, 114, 182, 0.12);
-    --tile-color-3: rgba(96, 165, 250, 0.12);
-    --tile-border: rgba(167, 139, 250, 0.18);
-}
-
 body {
     font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background-color: var(--bg-primary);
@@ -79,6 +56,7 @@ body {
     height: 100%;
     z-index: 0;
     pointer-events: none;
+    will-change: transform;
 }
 
 /* Remove grid lines - tiles will be rendered on canvas */
@@ -98,6 +76,7 @@ body::before {
     min-height: 100vh;
     position: relative;
     z-index: 1;
+    will-change: contents;
 }
 
 /* ===========================
@@ -164,21 +143,7 @@ body::before {
     height: 1.25rem;
 }
 
-.moon-icon {
-    display: block;
-}
-
-.sun-icon {
-    display: none;
-}
-
-[data-theme="dark"] .moon-icon {
-    display: none;
-}
-
-[data-theme="dark"] .sun-icon {
-    display: block;
-}
+/* Theme toggle icons removed - light mode only */
 
 /* ===========================
    Search
@@ -266,6 +231,7 @@ body::before {
     transition: all 0.3s ease;
     box-shadow: var(--shadow-sm);
     cursor: pointer;
+    color-scheme: light dark;
 }
 
 .date-input:focus {
@@ -273,6 +239,13 @@ body::before {
     border-color: var(--accent-primary);
     box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15), var(--shadow-md);
     transform: translateY(-1px);
+}
+
+/* Fix date picker calendar icon visibility */
+.date-input::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(0.5);
+    opacity: 0.8;
 }
 
 .add-btn {
@@ -362,6 +335,8 @@ body::before {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    content-visibility: auto;
+    contain-intrinsic-size: auto 500px;
 }
 
 /* ===========================
@@ -376,8 +351,9 @@ body::before {
     border: 2px solid var(--border-color);
     border-radius: 0.75rem;
     background-color: var(--bg-secondary);
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     box-shadow: var(--shadow-sm);
+    will-change: transform;
 }
 
 .task-item:hover {
@@ -617,16 +593,16 @@ body::before {
     .app-title {
         font-size: 1.75rem;
     }
-    
+
     .add-task-form {
         flex-direction: column;
     }
-    
+
     .task-input,
     .date-input {
         width: 100%;
     }
-    
+
     .task-item {
         padding: 0.875rem;
     }
@@ -636,11 +612,11 @@ body::before {
     .container {
         padding: 0.75rem;
     }
-    
+
     .app-title {
         font-size: 1.5rem;
     }
-    
+
     .header-top {
         flex-wrap: wrap;
     }
