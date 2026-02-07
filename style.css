@@ -221,17 +221,35 @@ body::before {
     transform: translateY(-1px);
 }
 
+.date-input-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.date-input-wrapper .date-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--text-muted);
+    pointer-events: none;
+    z-index: 1;
+}
+
 .date-input {
-    padding: 0.875rem 1rem;
+    padding: 0.875rem 1rem 0.875rem 2.75rem;
     border: 2px solid var(--border-color);
     border-radius: 0.75rem;
     background-color: var(--bg-secondary);
     color: var(--text-primary);
     font-size: 0.9375rem;
+    font-family: 'Space Grotesk', sans-serif;
     transition: all 0.3s ease;
     box-shadow: var(--shadow-sm);
     cursor: pointer;
-    color-scheme: light dark;
+    min-width: 150px;
 }
 
 .date-input:focus {
@@ -241,11 +259,9 @@ body::before {
     transform: translateY(-1px);
 }
 
-/* Fix date picker calendar icon visibility */
+/* Style the calendar picker indicator */
 .date-input::-webkit-calendar-picker-indicator {
     cursor: pointer;
-    filter: invert(0.5);
-    opacity: 0.8;
 }
 
 .add-btn {
