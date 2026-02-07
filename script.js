@@ -43,6 +43,24 @@ function init() {
     elements.searchInput.addEventListener('input', handleSearch);
     document.addEventListener('keydown', handleGlobalKeyboard);
 
+    // Handle date input placeholder
+    const dateWrapper = elements.dateInput.parentElement;
+    elements.dateInput.addEventListener('change', () => {
+        if (elements.dateInput.value) {
+            dateWrapper.classList.add('has-value');
+            elements.dateInput.classList.add('has-value');
+        } else {
+            dateWrapper.classList.remove('has-value');
+            elements.dateInput.classList.remove('has-value');
+        }
+    });
+
+    // Initialize date input state
+    if (elements.dateInput.value) {
+        dateWrapper.classList.add('has-value');
+        elements.dateInput.classList.add('has-value');
+    }
+
     console.log('✅ App initialized successfully');
 }
 
@@ -75,6 +93,11 @@ function handleAddTask(e) {
     elements.taskInput.value = '';
     elements.dateInput.value = '';
     elements.taskInput.focus();
+
+    // Reset date input placeholder
+    const dateWrapper = elements.dateInput.parentElement;
+    dateWrapper.classList.remove('has-value');
+    elements.dateInput.classList.remove('has-value');
 
     console.log('✅ Task added:', task);
 }
