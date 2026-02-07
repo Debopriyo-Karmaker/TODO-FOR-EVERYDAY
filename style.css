@@ -238,6 +238,25 @@ body::before {
     z-index: 1;
 }
 
+/* Add placeholder text when date is empty */
+.date-input-wrapper::after {
+    content: 'mm/dd/yyyy';
+    position: absolute;
+    left: 2.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+}
+
+/* Hide placeholder when date has value */
+.date-input-wrapper.has-value::after {
+    opacity: 0;
+}
+
 .date-input {
     padding: 0.875rem 1rem 0.875rem 2.75rem;
     border: 2px solid var(--border-color);
@@ -250,6 +269,11 @@ body::before {
     box-shadow: var(--shadow-sm);
     cursor: pointer;
     min-width: 150px;
+}
+
+/* Make the date input text transparent when empty */
+.date-input:not(.has-value) {
+    color: transparent;
 }
 
 .date-input:focus {
